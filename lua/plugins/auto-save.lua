@@ -5,7 +5,6 @@ return {
     enabled = true,
 
     trigger_events = {
-      -- Save on leaving insert mode, visual mode, or switching buffers/windows
       immediate_save = { "BufLeave", "FocusLost" },
       defer_save = { "InsertLeave" },
       cancel_deferred_save = { "InsertEnter" },
