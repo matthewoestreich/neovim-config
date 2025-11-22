@@ -26,3 +26,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 -----------------------------------------------------------------------------------------------------------------------
 -- END - Set floating windows background to black
 -----------------------------------------------------------------------------------------------------------------------
+---
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.diagnostic.enable(false)
+  end,
+})
