@@ -48,6 +48,7 @@ local ts_hl = {
   ["@tag"] = { fg = "#569cd6" },
   ["@field"] = { fg = "#9cdcfe" },
   ["@lsp.mod.mutable.rust"] = { fg = "#9cdcfe", bold = true },
+  ["DiagnosticUnnecessary"] = { fg = "#b3c9f2", bg = nil, italic = true },
 }
 
 for group, opts in pairs(ts_hl) do
