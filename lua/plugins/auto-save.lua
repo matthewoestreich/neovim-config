@@ -3,14 +3,12 @@ return {
   event = "VeryLazy",
   opts = {
     enabled = true,
+
     trigger_events = {
-      immediate_save = {},
-      defer_save = {
-        "TextChanged",
-        "TextChangedI",
-        "TextChangedP",
-      },
-      cancel_deferred_save = {},
+      -- Save on leaving insert mode, visual mode, or switching buffers/windows
+      immediate_save = { "BufLeave", "FocusLost" },
+      defer_save = { "InsertLeave" },
+      cancel_deferred_save = { "InsertEnter" },
     },
     debounce_delay = 500,
 
