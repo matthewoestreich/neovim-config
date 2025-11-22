@@ -9,6 +9,7 @@ return {
       defer_save = { "InsertLeave" },
       cancel_deferred_save = { "InsertEnter" },
     },
+
     debounce_delay = 500,
 
     condition = function(buf)
