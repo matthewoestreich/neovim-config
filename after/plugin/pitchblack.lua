@@ -47,8 +47,14 @@ local ts_hl = {
   ["@punctuation.bracket"] = { fg = "#C586C0" },
   ["@tag"] = { fg = "#569cd6" },
   ["@field"] = { fg = "#9cdcfe" },
+  ["DiagnosticUnnecessary"] = {
+    fg = "#736f44",
+    blend = 50,
+    undercurl = true,
+    underdouble = true,
+    underdashed = true,
+  },
   ["@lsp.mod.mutable.rust"] = { fg = "#9cdcfe", bold = true },
-  ["DiagnosticUnnecessary"] = { fg = "#b3c9f2", bg = nil, italic = true },
 }
 
 for group, opts in pairs(ts_hl) do
