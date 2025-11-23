@@ -2,8 +2,8 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
-      explorer = { hidden = true },
-      picker = { hidden = true },
+      explorer = { hidden = true, ignored = true },
+      picker = { hidden = true, ignored = true },
       indent = { enabled = false },
       dashboard = {
         preset = {
