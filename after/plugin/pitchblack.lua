@@ -10,6 +10,11 @@ vim.api.nvim_set_hl(0, "NormalNC", { fg = "#d4d4d4", bg = "#000000" })
 
 -- Treesitter / Syntax highlights
 local ts_hl = {
+  ["@constructor.typescript"] = { fg = "#4ec9b0" },
+  ["@keyword.return.typescript"] = { fg = "#C586C0" },
+  ["@keyword.coroutine.typescript"] = { fg = "#C586C0" },
+  ["@type.builtin.typescript"] = { fg = "#4EC9B0" },
+  ["@punctuation.special.typescript"] = { fg = "#D4D4D4" },
   ["@attribute"] = { fg = "#ffffff" },
   ["@comment"] = { fg = "#6a9955", italic = false },
   ["@string"] = { fg = "#d69d85" },
@@ -27,7 +32,7 @@ local ts_hl = {
   ["@function.method"] = { fg = "#DCDCAA" },
   ["@function.macro"] = { fg = "#ffffff" },
   ["@function.call"] = { fg = "#DCDCAA" },
-  ["@variable"] = { fg = "#9cdcfe" },
+  ["@variable"] = { fg = "#4fc1ff" },
   ["@variable.builtin"] = { fg = "#569cd6" },
   ["@variable.member"] = { fg = "#9cdcfe" },
   ["@variable.parameter"] = { fg = "#9cdcfe" },

@@ -11,5 +11,11 @@ vim.api.nvim_set_keymap("n", "<Leader>t", "<C-w>h", { noremap = true, silent = t
 vim.keymap.set("n", "<S-d>", '"_dd', { desc = "Delete line without affecting registers" })
 vim.keymap.set("v", "<S-d>", '"_d', { desc = "Delete selection without affecting registers" })
 
+-- Map H (go to start of line) and L (go to end of line)
+vim.keymap.set("n", "<S-h>", "^", { desc = "Go to start of line", noremap = true, silent = true })
+vim.keymap.set("n", "<S-l>", "$", { desc = "Go to end of line", noremap = true, silent = true })
+vim.keymap.set("v", "<S-h>", "^", { desc = "Go to start of line", noremap = true, silent = true })
+vim.keymap.set("v", "<S-l>", "$", { desc = "Go to end of line", noremap = true, silent = true })
+
 -- Map Ctrl+Z to exit terminal mode
 vim.keymap.set("t", "<C-z>", [[<C-\><C-n>]], { noremap = true, silent = true })
