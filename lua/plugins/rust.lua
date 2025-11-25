@@ -20,17 +20,6 @@ return {
               end,
               { silent = true, buffer = bufnr }
             )
-
-            vim.defer_fn(function()
-              vim.lsp.codelens.refresh({ bufnr = bufnr })
-            end, 200)
-
-            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-              buffer = bufnr,
-              callback = function()
-                pcall(vim.lsp.codelens.refresh, { bufnr = bufnr })
-              end,
-            })
           end,
           settings = {
             ["rust-analyzer"] = {
