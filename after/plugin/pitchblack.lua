@@ -1,7 +1,7 @@
 -- This file will be loaded automatically *after* all plugins
 
 -- Clear existing highlights
-vim.cmd("syntax reset")
+--vim.cmd("syntax reset")
 vim.o.background = "dark"
 
 -- Normal text

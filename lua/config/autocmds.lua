@@ -27,11 +27,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 -- END - Set floating windows background to black
 -----------------------------------------------------------------------------------------------------------------------
 
-
-
 -----------------------------------------------------------------------------------------------------------------------
 -- Disable annoying markdown LSP diagnostics
 -----------------------------------------------------------------------------------------------------------------------
+--[[
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
@@ -42,5 +41,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end,
 })
+--]]
 
 --
