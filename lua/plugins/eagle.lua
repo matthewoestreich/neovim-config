@@ -4,6 +4,8 @@ return {
     config = function()
       require("eagle").setup({
         keyboard_mode = true,
+        hover = { enabled = true },
+        lsp = { override = true },
       })
       vim.o.mousemoveevent = true
       vim.keymap.set("n", "<Tab>", ":EagleWin<CR>", { noremap = true, silent = true })

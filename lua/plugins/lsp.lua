@@ -5,9 +5,7 @@ return {
       opts.servers = opts.servers or {}
 
       -- RUST
-      opts.servers.rust_analyzer = {
-        mason = false,
-      }
+      -- see "~/.config/nvim/lua/plugins/rust.lua" for rust language server settings.
 
       -- TYPESCRIPT
       opts.servers.vtsls = {

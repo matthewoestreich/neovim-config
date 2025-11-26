@@ -23,6 +23,7 @@ return {
           end,
           settings = {
             ["rust-analyzer"] = {
+              mason = false,
               diagnostics = {
                 enable = true,
                 virtual_text = false,
