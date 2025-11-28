@@ -2,7 +2,7 @@ return {
   "okuuva/auto-save.nvim",
   event = "VeryLazy",
   opts = {
-    enabled = true,
+    enabled = false,
 
     trigger_events = {
       immediate_save = { "BufLeave", "FocusLost" },
