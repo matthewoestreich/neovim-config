@@ -14,8 +14,18 @@ vim.keymap.set("t", "<leader>jj", [[<C-\><C-n>]], { noremap = true, silent = tru
 vim.api.nvim_set_keymap("n", "<Leader>t", "<C-w>h", { noremap = true, silent = true })
 
 --Delete without cutting (does not add deleted text to buffer).
-vim.keymap.set("n", "<S-d>", '"_dd', { desc = "Delete line without affecting registers" })
-vim.keymap.set("v", "<S-d>", '"_d', { desc = "Delete selection without affecting registers" })
+vim.keymap.set(
+  "n",
+  "<S-d>",
+  '"_dd',
+  { desc = "Delete line without affecting registers", noremap = true, silent = true }
+)
+vim.keymap.set(
+  "v",
+  "<S-d>",
+  '"_d',
+  { desc = "Delete selection without affecting registers", noremap = true, silent = true }
+)
 
 -- Map H (go to start of line) and L (go to end of line)
 vim.keymap.set("n", "<S-h>", "^", { desc = "Go to start of line", noremap = true, silent = true })
