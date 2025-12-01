@@ -60,6 +60,10 @@ local ts_hl = {
     underdashed = true,
   },
   ["@lsp.mod.mutable.rust"] = { fg = "#9cdcfe", bold = true },
+  ["SnacksPickerGitStatusUntracked"] = { fg = "#b6b6c0", italic = true },
+  ["DiagnosticUnderlineError"] = { undercurl = true, underdouble = true, sp = "#ff0000" },
+  ["DiagnosticUnderlineHint"] = { undercurl = true, underdouble = true, sp = "#4fd6be" },
+  ["DiagnosticUnderlineWarn"] = { undercurl = true, underdouble = true, sp = "#ffc777" },
 }
 
 for group, opts in pairs(ts_hl) do
