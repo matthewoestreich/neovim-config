@@ -1,5 +1,9 @@
 -- This file will be loaded automatically *after* all plugins
 
+-- Add this folder path to package so we can import it.
+package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/after/plugin/?.lua"
+local rainbow_delimiters = require("setup-rainbow-delimiters")
+
 -- Clear existing highlights
 --vim.cmd("syntax reset")
 vim.o.background = "dark"
@@ -14,7 +18,6 @@ local ts_hl = {
   ["@keyword.return.typescript"] = { fg = "#C586C0" },
   ["@keyword.coroutine.typescript"] = { fg = "#C586C0" },
   ["@type.builtin.typescript"] = { fg = "#4EC9B0" },
-  ["@punctuation.special.typescript"] = { fg = "#D4D4D4" },
   ["@attribute"] = { fg = "#ffffff" },
   ["@comment"] = { fg = "#6a9955", italic = false },
   ["@string"] = { fg = "#d69d85" },
@@ -45,11 +48,8 @@ local ts_hl = {
   ["@namespace"] = { fg = "#569cd6" },
   ["@parameter"] = { fg = "#9cdcfe" },
   ["@property"] = { fg = "#9cdcfe" },
-  ["@method"] = { fg = "#DCDCAA" },
-  ["@punctuation"] = { fg = "#d4d4d4" },
   ["@punctuation.delimiter"] = { fg = "#ffffff" },
-  ["@punctuation.special.rust"] = { fg = "#ffffff" },
-  ["@punctuation.bracket"] = { fg = "#C586C0" },
+  ["@method"] = { fg = "#DCDCAA" },
   ["@tag"] = { fg = "#569cd6" },
   ["@field"] = { fg = "#9cdcfe" },
   ["@lsp.mod.mutable.rust"] = { fg = "#9cdcfe", bold = true },
@@ -60,8 +60,6 @@ local ts_hl = {
   ["DiagnosticUnderlineWarn"] = { undercurl = true, underdouble = true, sp = "#ffc777" },
   ["DiagnosticUnnecessary"] = {
     blend = 50,
-    --undercurl = true,
-    --underdashed = true,
     underdouble = true,
     fg = "#736f44",
     sp = "#ffc777",
@@ -71,3 +69,5 @@ local ts_hl = {
 for group, opts in pairs(ts_hl) do
   vim.api.nvim_set_hl(0, group, opts)
 end
+
+rainbow_delimiters.setup()
