@@ -52,18 +52,19 @@ local ts_hl = {
   ["@punctuation.bracket"] = { fg = "#C586C0" },
   ["@tag"] = { fg = "#569cd6" },
   ["@field"] = { fg = "#9cdcfe" },
-  ["DiagnosticUnnecessary"] = {
-    fg = "#736f44",
-    blend = 50,
-    undercurl = true,
-    underdouble = true,
-    underdashed = true,
-  },
   ["@lsp.mod.mutable.rust"] = { fg = "#9cdcfe", bold = true },
   ["SnacksPickerGitStatusUntracked"] = { fg = "#b6b6c0", italic = true },
   ["DiagnosticUnderlineError"] = { undercurl = true, underdouble = true, sp = "#ff0000" },
   ["DiagnosticUnderlineHint"] = { undercurl = true, underdouble = true, sp = "#4fd6be" },
   ["DiagnosticUnderlineWarn"] = { undercurl = true, underdouble = true, sp = "#ffc777" },
+  ["DiagnosticUnnecessary"] = {
+    blend = 50,
+    --undercurl = true,
+    --underdashed = true,
+    underdouble = true,
+    fg = "#736f44",
+    sp = "#ffc777",
+  },
 }
 
 for group, opts in pairs(ts_hl) do

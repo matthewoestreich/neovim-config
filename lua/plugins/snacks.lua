@@ -9,6 +9,17 @@ return {
       picker = {
         hidden = true,
         ignored = true,
+        --[[ 
+        sources = {
+          explorer = {
+            icons = {
+              diagnostics = {
+                Hint = "",
+              },
+            },
+          },
+        },
+        --]]
       },
       indent = {
         enabled = false,
