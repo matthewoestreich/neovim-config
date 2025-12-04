@@ -33,7 +33,7 @@ local ts_hl = {
   ["@function"] = { fg = "#DCDCAA" },
   ["@function.rust"] = { fg = "#DCDCAA" },
   ["@function.method"] = { fg = "#DCDCAA" },
-  ["@function.macro"] = { fg = "#ffffff" },
+  --["@function.macro"] = { fg = "#C32148" },
   ["@function.call"] = { fg = "#DCDCAA" },
   ["@variable"] = { fg = "#9CDCFE" },
   ["@variable.builtin"] = { fg = "#569cd6" },
