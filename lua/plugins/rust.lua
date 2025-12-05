@@ -4,22 +4,19 @@ return {
     "mrcjkb/rustaceanvim",
     version = "^6",
     lazy = false,
-    ft = "rust",
     init = function()
       vim.g.rustaceanvim = {
         tools = {
+          check = { command = "clippy" },
+          hover_actions = { replace_builtin_hover = true },
+          code_actions = { ui_select_fallback = true },
           enable_codelens = true,
         },
         server = {
           on_attach = function(_, bufnr)
-            vim.keymap.set(
-              "n",
-              "K", -- Override Neovim's built-in hover keymap with rustaceanvim's hover actions
-              function()
-                vim.cmd.RustLsp({ "hover", "actions" })
-              end,
-              { silent = true, buffer = bufnr }
-            )
+            vim.keymap.set("n", "K", function()
+              vim.cmd.RustLsp({ "hover", "actions" })
+            end, { silent = true, buffer = bufnr })
           end,
           settings = {
             ["rust-analyzer"] = {
