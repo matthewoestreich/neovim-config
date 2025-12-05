@@ -23,6 +23,9 @@ return {
           end,
           settings = {
             ["rust-analyzer"] = {
+              check = {
+                command = "clippy",
+              },
               mason = false,
               diagnostics = {
                 enable = true,
