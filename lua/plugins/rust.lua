@@ -9,13 +9,14 @@ return {
         tools = {
           check = { command = "clippy" },
           hover_actions = { replace_builtin_hover = true },
-          code_actions = { ui_select_fallback = true },
+          code_action = { ui_select_fallback = true },
           enable_codelens = true,
         },
         server = {
           on_attach = function(_, bufnr)
-            vim.keymap.set("n", "K", function()
-              vim.cmd.RustLsp({ "hover", "actions" })
+            vim.keymap.set("n", "<leader>Krd", function()
+              --vim.cmd.RustLsp({ "hover", "actions" })
+              vim.cmd.RustLsp({ "renderDiagnostic", "current" })
             end, { silent = true, buffer = bufnr })
           end,
           settings = {

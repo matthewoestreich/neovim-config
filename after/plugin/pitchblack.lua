@@ -55,6 +55,7 @@ local ts_hl = {
   ["@field"] = { fg = "#9cdcfe" },
   ["@lsp.mod.mutable.rust"] = { fg = "#9cdcfe", bold = true },
   ["@lsp.typemod.generic.attribute.rust"] = { fg = "#ffffff" },
+  ["@lsp.type.formatSpecifier.rust"] = { fg = "#569cd6" },
   ["@type.builtin.rust"] = { fg = "#4EC9B0" },
   ["SnacksPickerGitStatusUntracked"] = { fg = "#b6b6c0", italic = true },
   ["DiagnosticUnderlineError"] = { undercurl = true, underdouble = true, sp = "#ff0000" },
