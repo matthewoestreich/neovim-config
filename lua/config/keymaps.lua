@@ -4,6 +4,26 @@
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+-- Neotest : run tests
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>tn",
+  ":lua require('neotest').run.run()<CR>",
+  { noremap = true, silent = true, desc = "Run test at cursor" }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>tf",
+  ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>",
+  { noremap = true, silent = true, desc = "Run all tests in current file" }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>td",
+  ":lua require('neotest').run.run({strategy = 'dap'})<CR>",
+  { noremap = true, silent = true, desc = "Run test DAP" }
+)
+
 -- Press `jj` to go back to Normal mode.
 vim.keymap.set("i", "jj", "<ESC>", { noremap = true, silent = true })
 vim.keymap.set("v", "<leader>jj", "<ESC>", { noremap = true, silent = true })
@@ -11,7 +31,7 @@ vim.keymap.set("v", "<leader>jj", "<ESC>", { noremap = true, silent = true })
 vim.keymap.set("t", "<leader>jj", [[<C-\><C-n>]], { noremap = true, silent = true })
 
 -- Jump to Nvim-Tree window
-vim.api.nvim_set_keymap("n", "<Leader>t", "<C-w>h", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>tt", "<C-w>h", { noremap = true, silent = true })
 
 --Delete without cutting (does not add deleted text to buffer).
 vim.keymap.set(

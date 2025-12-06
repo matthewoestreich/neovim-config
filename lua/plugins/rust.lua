@@ -14,10 +14,24 @@ return {
         },
         server = {
           on_attach = function(_, bufnr)
-            vim.keymap.set("n", "<leader>Krd", function()
-              --vim.cmd.RustLsp({ "hover", "actions" })
+            vim.keymap.set("n", "<leader>rrd", function()
               vim.cmd.RustLsp({ "renderDiagnostic", "current" })
-            end, { silent = true, buffer = bufnr })
+            end, { silent = true, buffer = bufnr, desc = "RustLsp renderDiagnostic current" })
+
+            vim.keymap.set("n", "K", function()
+              vim.cmd.RustLsp({ "hover", "actions" })
+            end, { silent = true, buffer = bufnr, desc = "RustLsp hover actions" })
+
+            vim.defer_fn(function()
+              vim.lsp.codelens.refresh({ bufnr = bufnr })
+            end, 200)
+
+            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+              buffer = bufnr,
+              callback = function()
+                pcall(vim.lsp.codelens.refresh, { bufnr = bufnr })
+              end,
+            })
           end,
           settings = {
             ["rust-analyzer"] = {
@@ -44,25 +58,15 @@ return {
       opts.adapters = opts.adapters or {}
       table.insert(opts.adapters, require("rustaceanvim.neotest"))
 
-      -- Optional: keymaps for running tests
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>tn",
-        ":lua require('neotest').run.run()<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>tf",
-        ":lua require('neotest').run.run(vim.fn.expand('%'))<CR>",
-        { noremap = true, silent = true }
-      )
-      vim.api.nvim_set_keymap(
-        "n",
-        "<leader>td",
-        ":lua require('neotest').run.run({strategy = 'dap'})<CR>",
-        { noremap = true, silent = true }
-      )
+      opts.status = {
+        enabled = true,
+        virtual_text = true, -- shows inline run/debug buttons
+        signs = true, -- gutter signs
+      }
+
+      opts.output_panel = { enabled = true }
+      opts.quickfix = { enabled = false }
+      opts.summary = { enabled = true }
     end,
   },
 }
