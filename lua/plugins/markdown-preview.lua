@@ -1,6 +1,6 @@
 return {
   "iamcco/markdown-preview.nvim",
-  ft = { "markdown" }, -- only load for markdown files
+  ft = { "markdown", "md", "mdx" }, -- only load for markdown files
   build = function()
     vim.fn["mkdp#util#install"]()
   end,
