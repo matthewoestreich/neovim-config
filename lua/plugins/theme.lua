@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: unused-local
 local kanigawa = {
   "rebelot/kanagawa.nvim",
   lazy = false,
