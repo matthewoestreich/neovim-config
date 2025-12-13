@@ -2,8 +2,6 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     config = function(_, opts)
-      --opts.theme = "auto"
-
       --[[
       opts.sections = opts.sections or {}
       opts.sections.lualine_c = opts.sections.lualine_c or {}

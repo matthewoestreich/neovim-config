@@ -1,6 +1,5 @@
 local kanigawa = {
   "rebelot/kanagawa.nvim",
-  enabled = false,
   lazy = false,
   priority = 1000,
   config = function()
@@ -19,11 +18,19 @@ local kanigawa = {
         }
       end,
     })
+    vim.cmd("colorscheme kanagawa")
+  end,
+}
 
-    --vim.cmd("colorscheme kanagawa")
+local pitchblack = {
+  dir = vim.fn.stdpath("config") .. "/colors",
+  lazy = false,
+  config = function()
+    vim.cmd("colorscheme pitchblack")
   end,
 }
 
 return {
   --kanigawa,
+  pitchblack,
 }

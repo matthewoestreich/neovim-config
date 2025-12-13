@@ -1,5 +1,3 @@
-vim.g.colors_name = "pitchblack"
-
 local function set_nvim_colors()
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000", fg = "#ffffff" })
   vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#000000", fg = "#888888" })
@@ -51,44 +49,56 @@ local function setup_rainbow_delimiters()
 end
 
 local function apply_lualine_colors()
-  local lualine_colors = {
-    lualine_a_normal = { fg = "#1b1d2b", bg = "#82aaff", bold = true },
-    lualine_b_normal = { fg = "#82aaff", bg = "#3b4261", bold = false },
-    lualine_a_insert = { fg = "#1b1d2b", bg = "#c3e88d", bold = true },
-    lualine_b_insert = { fg = "#c3e88d", bg = "#3b4261", bold = false },
-    lualine_a_command = { fg = "#1b1d2b", bg = "#ffc777", bold = true },
-    lualine_b_command = { fg = "#ffc777", bg = "#3b4261", bold = false },
-    lualine_a_visual = { fg = "#1b1d2b", bg = "#c099ff", bold = true },
-    lualine_b_visual = { fg = "#c099ff", bg = "#3b4261", bold = false },
-    lualine_a_replace = { fg = "#1b1d2b", bg = "#ff757f", bold = true },
-    lualine_a_terminal = { fg = "#1b1d2b", bg = "#4fd6be", bold = true },
-    lualine_b_terminal = { fg = "#4fd6be", bg = "#3b4261", bold = false },
-
-    lualine_transitional_lualine_a_normal_to_lualine_b_normal = { fg = "#82aaff", bg = "#3b4261" },
-    lualine_transitional_lualine_b_normal_to_lualine_c_normal = { fg = "#3b4261", bg = "#1e2030" },
-    lualine_transitional_lualine_b_normal_to_lualine_x_13_normal = { fg = "#3b4261", bg = "#1e2030" },
-    lualine_transitional_lualine_a_insert_to_lualine_b_insert = { fg = "#c3e88d", bg = "#3b4261" },
-    lualine_transitional_lualine_b_insert_to_lualine_c_normal = { fg = "#3b4261", bg = "#1e2030" },
-    lualine_transitional_lualine_b_insert_to_lualine_x_13_insert = { fg = "#3b4261", bg = "#1e2030" },
-    lualine_transitional_lualine_b_normal_to_lualine_c_filetype_MiniIconsYellow_normal = {
-      fg = "#3b4261",
-      bg = "#1e2030",
+  local theme = {
+    normal = {
+      a = { fg = "#1b1d2b", bg = "#82aaff", gui = "bold" },
+      b = { fg = "#82aaff", bg = "#3b4261" },
+      c = { fg = "#ffffff", bg = "#1e2030" },
     },
-    lualine_transitional_lualine_a_command_to_lualine_b_command = { fg = "#ffc777", bg = "#3b4261" },
-    lualine_transitional_lualine_b_command_to_lualine_c_filetype_MiniIconsYellow_command = {
-      fg = "#3b4261",
-      bg = "#1e2030",
+    insert = {
+      a = { fg = "#1b1d2b", bg = "#c3e88d", gui = "bold" },
+      b = { fg = "#c3e88d", bg = "#3b4261" },
+      c = { fg = "#ffffff", bg = "#1e2030" },
     },
-    lualine_transitional_lualine_b_command_to_lualine_x_13_command = { fg = "#3b4261", bg = "#1e2030" },
-    --lualine_a_inactive = { fg = "#82aaff", bg = "#1e2030", bold = true },
-    --StatusLine = { fg = "#828bb8", bg = "#1e2030" },
-    --StatusLineNC = { fg = "#3b4261", bg = "#1e2030" },
+    visual = {
+      a = { fg = "#1b1d2b", bg = "#c099ff", gui = "bold" },
+      b = { fg = "#c099ff", bg = "#3b4261" },
+      c = { fg = "#ffffff", bg = "#1e2030" },
+    },
+    command = {
+      a = { fg = "#1b1d2b", bg = "#ffc777", gui = "bold" },
+      b = { fg = "#ffc777", bg = "#3b4261" },
+      c = { fg = "#ffffff", bg = "#1e2030" },
+    },
+    replace = {
+      a = { fg = "#1b1d2b", bg = "#ff757f", gui = "bold" },
+      b = { fg = "#ff757f", bg = "#3b4261" },
+      c = { fg = "#ffffff", bg = "#1e2030" },
+    },
+    terminal = {
+      a = { fg = "#1b1d2b", bg = "#4fd6be", gui = "bold" },
+      b = { fg = "#4fd6be", bg = "#3b4261" },
+      c = { fg = "#ffffff", bg = "#1e2030" },
+    },
+    inactive = {
+      a = { fg = "#82aaff", bg = "#1e2030", gui = "bold" },
+      b = { fg = "#3b4261", bg = "#1e2030" },
+      c = { fg = "#828bb8", bg = "#1e2030" },
+    },
   }
-  for group, opts in pairs(lualine_colors) do
-    vim.api.nvim_set_hl(0, group, opts)
-  end
+
+  -- Apply the theme
+  require("lualine").setup({
+    options = {
+      theme = theme,
+      component_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
+      globalstatus = true,
+    },
+  })
 end
 
+vim.g.colors_name = "pitchblack"
 vim.o.background = "dark"
 
 -- Normal text
