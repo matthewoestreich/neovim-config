@@ -1,4 +1,4 @@
-local function set_nvim_colors()
+local function apply_nvim_colors()
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000", fg = "#ffffff" })
   vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#000000", fg = "#888888" })
   -- Line numbers
@@ -12,29 +12,25 @@ local function set_nvim_colors()
   vim.api.nvim_set_hl(0, "FoldColumn", { bg = "#000000" })
 end
 
-local function setup_rainbow_delimiters()
-  if not package.loaded["rainbow-delimiters"] then
-    if package.loaded["lazy"] then
-      -- Load the plugin via lazy.nvim
-      require("lazy").load({ plugins = { "rainbow-delimiters.nvim" } })
-      -- Run the plugin config manually
-      require("rainbow-delimiters")
-      vim.g.rainbow_delimiters = {
-        highlight = {
-          "RainbowDelimiterRed",
-          "RainbowDelimiterOrange",
-          "RainbowDelimiterYellow",
-          "RainbowDelimiterGreen",
-          "RainbowDelimiterBlue",
-          "RainbowDelimiterViolet",
-          "RainbowDelimiterCyan",
-        },
-      }
-    else
-      vim.notify("lazy.nvim not loaded, cannot load rainbow-delimiters.nvim!", vim.log.levels.WARN)
-      return
-    end
+local function apply_rainbow_delimiters()
+  if not package.loaded["rainbow-delimiters"] and package.loaded("lazy") then
+    -- Load the plugin via lazy.nvim
+    require("lazy").load({ plugins = { "rainbow-delimiters.nvim" } })
+    -- Run the plugin config manually
+    require("rainbow-delimiters")
+    vim.g.rainbow_delimiters = {
+      highlight = {
+        "RainbowDelimiterRed",
+        "RainbowDelimiterOrange",
+        "RainbowDelimiterYellow",
+        "RainbowDelimiterGreen",
+        "RainbowDelimiterBlue",
+        "RainbowDelimiterViolet",
+        "RainbowDelimiterCyan",
+      },
+    }
   end
+
   -- Clear punctuation colors so RainbowDelimiter colors show
   for _, grp in ipairs({
     "@punctuation.bracket",
@@ -188,14 +184,14 @@ for group, opts in pairs(ts_hl) do
 end
 
 -- Set floating windows to black
-set_nvim_colors()
+apply_nvim_colors()
 apply_lualine_colors()
-setup_rainbow_delimiters()
+apply_rainbow_delimiters()
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
-    set_nvim_colors()
+    apply_nvim_colors()
     apply_lualine_colors()
-    setup_rainbow_delimiters()
+    apply_rainbow_delimiters()
   end,
 })
