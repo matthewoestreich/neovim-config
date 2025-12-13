@@ -1,7 +1,9 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
-    opts = function(_, opts)
+    config = function(_, opts)
+      --opts.theme = "auto"
+
       --[[
       opts.sections = opts.sections or {}
       opts.sections.lualine_c = opts.sections.lualine_c or {}
@@ -21,6 +23,7 @@ return {
       --]]
 
       -- only change lualine_z, leave everything else intact
+      opts.sections = opts.sections or {}
       opts.sections.lualine_z = {
         function()
           local hour = tonumber(os.date("%I"))
@@ -29,6 +32,8 @@ return {
           return "  " .. hour .. ":" .. minute .. " " .. ampm
         end,
       }
+
+      require("lualine").setup(opts)
     end,
   },
 }

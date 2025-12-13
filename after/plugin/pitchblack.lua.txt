@@ -1,11 +1,53 @@
--- This file will be loaded automatically *after* all plugins
+local function set_nvim_colors()
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000", fg = "#ffffff" })
+  vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#000000", fg = "#888888" })
+  -- Line numbers
+  --vim.api.nvim_set_hl(0, "LineNr", { fg = "#555555", bg = "#000000" })
+  vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#777777", bg = "#000000" })
+  vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#777777", bg = "#000000" })
+  -- Sign column (git signs, diagnostics, breakpoints)
+  vim.api.nvim_set_hl(0, "SignColumn", { bg = "#000000" })
+  vim.api.nvim_set_hl(0, "SignColumnSB", { bg = "#000000" })
+  -- Fold column (if shown)
+  vim.api.nvim_set_hl(0, "FoldColumn", { bg = "#000000" })
+end
 
--- Add this folder path to package so we can import it.
-package.path = package.path .. ";" .. vim.fn.stdpath("config") .. "/after/plugin/?.lua"
-local rainbow_delimiters = require("setup-rainbow-delimiters")
+local function setup_rainbow_delimiters()
+  -- Clear punctuation colors so RainbowDelimiter colors show
+  for _, grp in ipairs({
+    "@punctuation.bracket",
+    "@punctuation.bracket.rust",
+    "@punctuation.bracket.typescript",
+    "@punctuation.bracket.javascript",
+    "@punctuation.bracket.jsx",
+    "@punctuation.bracket.tsx",
+  }) do
+    vim.api.nvim_set_hl(0, grp, { fg = "NONE", bg = "NONE", link = "" })
+  end
 
--- Clear existing highlights
---vim.cmd("syntax reset")
+  -- VS Code's default bracket colors (in correct nesting order)
+  local rainbow_delimiter_hls = {
+    RainbowDelimiterYellow = { fg = "#FFD700" },
+    RainbowDelimiterPurple = { fg = "#DA70D6" },
+    RainbowDelimiterBlue = { fg = "#179fff" },
+  }
+
+  -- Apply highlights
+  for group, opts in pairs(rainbow_delimiter_hls) do
+    vim.api.nvim_set_hl(0, group, opts)
+  end
+
+  -- Set nesting order — MOST IMPORTANT PART
+  vim.g.rainbow_delimiters = {
+    highlight = {
+      "RainbowDelimiterYellow",
+      "RainbowDelimiterPurple",
+      "RainbowDelimiterBlue",
+    },
+    highlight_priority = 2000,
+  }
+end
+
 vim.o.background = "dark"
 
 -- Normal text
@@ -33,7 +75,6 @@ local ts_hl = {
   ["@function"] = { fg = "#DCDCAA" },
   ["@function.rust"] = { fg = "#DCDCAA" },
   ["@function.method"] = { fg = "#DCDCAA" },
-  --["@function.macro"] = { fg = "#C32148" },
   ["@function.call"] = { fg = "#DCDCAA" },
   ["@variable"] = { fg = "#9CDCFE" },
   ["@variable.builtin"] = { fg = "#569cd6" },
@@ -73,4 +114,14 @@ for group, opts in pairs(ts_hl) do
   vim.api.nvim_set_hl(0, group, opts)
 end
 
-rainbow_delimiters.setup()
+-- Set floating windows to black
+set_nvim_colors()
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    set_nvim_colors()
+    --setup_rainbow_delimiters()
+  end,
+})
+
+-- Rainbow delimiters
+setup_rainbow_delimiters()
