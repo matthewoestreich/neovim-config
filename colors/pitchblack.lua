@@ -13,25 +13,16 @@ local function apply_nvim_colors()
 end
 
 local function apply_rainbow_delimiters()
-  if not package.loaded["rainbow-delimiters"] and package.loaded("lazy") then
-    -- Load the plugin via lazy.nvim
-    require("lazy").load({ plugins = { "rainbow-delimiters.nvim" } })
-    -- Run the plugin config manually
-    require("rainbow-delimiters")
-    vim.g.rainbow_delimiters = {
-      highlight = {
-        "RainbowDelimiterRed",
-        "RainbowDelimiterOrange",
-        "RainbowDelimiterYellow",
-        "RainbowDelimiterGreen",
-        "RainbowDelimiterBlue",
-        "RainbowDelimiterViolet",
-        "RainbowDelimiterCyan",
-      },
-    }
-  end
+  require("rainbow-delimiters")
+  vim.g.rainbow_delimiters = {
+    highlight = {
+      "RainbowDelimiterYellow",
+      "RainbowDelimiterPurple",
+      "RainbowDelimiterBlue",
+    },
+    highlight_priority = 2000,
+  }
 
-  -- Clear punctuation colors so RainbowDelimiter colors show
   for _, grp in ipairs({
     "@punctuation.bracket",
     "@punctuation.bracket.rust",
@@ -43,27 +34,9 @@ local function apply_rainbow_delimiters()
     vim.api.nvim_set_hl(0, grp, { fg = "NONE", bg = "NONE", link = "" })
   end
 
-  -- VS Code's default bracket colors (in correct nesting order)
-  local rainbow_delimiter_hls = {
-    RainbowDelimiterYellow = { fg = "#FFD700" },
-    RainbowDelimiterPurple = { fg = "#DA70D6" },
-    RainbowDelimiterBlue = { fg = "#179fff" },
-  }
-
-  -- Apply highlights
-  for group, opts in pairs(rainbow_delimiter_hls) do
-    vim.api.nvim_set_hl(0, group, opts)
-  end
-
-  -- Set nesting order — MOST IMPORTANT PART
-  vim.g.rainbow_delimiters = {
-    highlight = {
-      "RainbowDelimiterYellow",
-      "RainbowDelimiterPurple",
-      "RainbowDelimiterBlue",
-    },
-    highlight_priority = 2000,
-  }
+  vim.api.nvim_set_hl(0, "RainbowDelimiterYellow", { fg = "#FFD700" })
+  vim.api.nvim_set_hl(0, "RainbowDelimiterPurple", { fg = "#DA70D6" })
+  vim.api.nvim_set_hl(0, "RainbowDelimiterBlue", { fg = "#179fff" })
 end
 
 local function apply_lualine_colors()
