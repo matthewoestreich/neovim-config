@@ -24,11 +24,12 @@ local kanigawa = {
 }
 
 local pitchblack = {
-  dir = vim.fn.stdpath("config") .. "/colors",
+  "matthewoestreich/pitchblack.nvim",
   lazy = false,
-  config = function()
-    vim.cmd("colorscheme pitchblack")
-  end,
+  dependencies = {
+    "HiPhish/rainbow-delimiters.nvim",
+  },
+  opts = {},
 }
 
 return {

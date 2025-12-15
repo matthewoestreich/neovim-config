@@ -1,4 +1,6 @@
 local function apply_nvim_colors()
+  vim.api.nvim_set_hl(0, "Normal", { fg = "#d4d4d4", bg = "#000000" })
+  vim.api.nvim_set_hl(0, "NormalNC", { fg = "#d4d4d4", bg = "#000000" })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000", fg = "#ffffff" })
   vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#000000", fg = "#888888" })
   -- Line numbers
@@ -91,10 +93,6 @@ end
 
 vim.g.colors_name = "pitchblack"
 vim.o.background = "dark"
-
--- Normal text
-vim.api.nvim_set_hl(0, "Normal", { fg = "#d4d4d4", bg = "#000000" })
-vim.api.nvim_set_hl(0, "NormalNC", { fg = "#d4d4d4", bg = "#000000" })
 
 -- Treesitter / Syntax highlights
 local ts_hl = {
