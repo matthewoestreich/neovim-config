@@ -25,6 +25,7 @@ local kanigawa = {
 
 local pitchblack = {
   "matthewoestreich/pitchblack.nvim",
+  priority = 1000,
   lazy = false,
   dependencies = {
     "HiPhish/rainbow-delimiters.nvim",
