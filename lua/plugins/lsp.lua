@@ -27,6 +27,26 @@ return {
         },
       }
 
+      -- LUA (for wezterm + general lua)
+      opts.servers.lua_ls = {
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "wezterm", "vim" },
+            },
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.fn.expand("~/.luarocks/share/lua/5.4/wezterm/types"),
+              },
+            },
+            hint = {
+              enable = true,
+            },
+          },
+        },
+      }
+
       opts.diagnostics = {
         enabled = true,
         virtual_text = false,
