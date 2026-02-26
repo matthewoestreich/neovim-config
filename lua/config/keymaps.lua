@@ -4,6 +4,12 @@
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+-- Delete without yank (use "c" instead if you want to cut eg. delete + yank)
+vim.keymap.set("n", "d", '"_d', { desc = "Delete without yank" })
+vim.keymap.set("v", "d", '"_d', { desc = "Delete without yank" })
+vim.keymap.set("n", "x", '"_x', { desc = "Delete char without yank" })
+vim.keymap.set("v", "x", '"_x', { desc = "Delete char without yank" })
+
 -- Neotest : run tests
 vim.api.nvim_set_keymap(
   "n",
