@@ -1,5 +1,5 @@
 {
-    "diagnostics.disable": [
-        "inject-field"
-    ]
+  "diagnostics.disable": ["inject-field"],
+  "diagnostics.globals": ["wezterm", "vim", "lspconfig"]
 }
+
