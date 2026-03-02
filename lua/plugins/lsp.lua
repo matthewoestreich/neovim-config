@@ -14,7 +14,9 @@ local function find_root_dir(opts)
       return nil
     end
 
+    local cwd = vim.fn.getcwd()
     local dir = vim.fs.dirname(fname)
+
     while dir do
       -- check excludes first
       for _, ex in ipairs(excludes) do
@@ -34,6 +36,10 @@ local function find_root_dir(opts)
       local parent = vim.fs.dirname(dir)
       if parent == dir then
         break
+      end
+      -- fail-safe: stop if we reach cwd
+      if dir == cwd then
+        return nil
       end
       dir = parent
     end
