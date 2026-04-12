@@ -33,6 +33,24 @@ return {
               end,
             })
           end,
+          default_settings = {
+            ["rust-analyzer"] = {
+              check = {
+                command = "clippy",
+              },
+              mason = false,
+              imports = {
+                group = {
+                  enable = true,
+                },
+              },
+              diagnostics = {
+                enable = true,
+                virtual_text = false,
+              },
+            },
+          },
+          --[[
           settings = {
             ["rust-analyzer"] = {
               check = {
@@ -45,6 +63,7 @@ return {
               },
             },
           },
+          ]]
         },
       }
     end,
