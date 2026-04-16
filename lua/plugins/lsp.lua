@@ -53,6 +53,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+
       servers = {
         vtsls = {
           cmd = { "vtsls", "--stdio" },
@@ -138,7 +139,8 @@ return {
       },
 
       diagnostics = {
-        enabled = true,
+        enabled = false,
+        float = false,
         virtual_text = false,
         severity_sort = true,
         signs = true,

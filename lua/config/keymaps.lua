@@ -33,6 +33,8 @@ vim.api.nvim_set_keymap(
 -- Press `jj` to go back to Normal mode.
 vim.keymap.set("i", "jj", "<ESC>", { noremap = true, silent = true })
 vim.keymap.set("v", "<leader>jj", "<ESC>", { noremap = true, silent = true })
+vim.keymap.set("i", "JJ", "<ESC>", { noremap = true, silent = true })
+vim.keymap.set("v", "<leader>JJ", "<ESC>", { noremap = true, silent = true })
 -- Map keymap to exit terminal mode
 vim.keymap.set("t", "<leader>jj", [[<C-\><C-n>]], { noremap = true, silent = true })
 
