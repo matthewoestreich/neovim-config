@@ -3,7 +3,6 @@
 local function find_root_dir(opts)
   local roots = type(opts.root) == "table" and opts.root or { opts.root }
   local excludes = type(opts.exclude) == "table" and opts.exclude or { opts.exclude }
-
   ---@param fname string
   ---@return string|nil
   return function(fname)
@@ -13,10 +12,8 @@ local function find_root_dir(opts)
     if fname == "" then
       return nil
     end
-
     local cwd = vim.fn.getcwd()
     local dir = vim.fs.dirname(fname)
-
     while dir do
       -- check excludes first
       for _, ex in ipairs(excludes) do
@@ -24,14 +21,12 @@ local function find_root_dir(opts)
           return nil -- stop immediately if we hit an exclude
         end
       end
-
       -- check roots
       for _, root in ipairs(roots) do
         if #vim.fn.glob(table.concat({ dir, root }, "/")) > 0 then
           return dir -- stop immediately if we hit a root
         end
       end
-
       -- move upward
       local parent = vim.fs.dirname(dir)
       if parent == dir then
@@ -47,6 +42,12 @@ local function find_root_dir(opts)
     return nil
   end
 end
+
+--[[
+  CONFIG STARTS HERE
+--]]
+
+-- local util = require("lspconfig.util")
 
 return {
   {
@@ -99,6 +100,19 @@ return {
               enable = true,
               lint = true,
               unstable = true,
+            },
+          },
+        },
+
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = "standard",
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = "workspace", -- "openFilesOnly",
+              },
             },
           },
         },
