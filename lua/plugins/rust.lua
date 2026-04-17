@@ -8,12 +8,9 @@ return {
       vim.g.rustaceanvim = {
         tools = {
           --check = { command = "clippy" },
-          float_win_config = {
-            auto_focus = false,
-          },
-          hover_actions = { replace_builtin_hover = false },
-          code_action = { ui_select_fallback = false },
-          enable_codelens = false,
+          hover_actions = { replace_builtin_hover = true },
+          code_action = { ui_select_fallback = true },
+          enable_codelens = true,
         },
         server = {
           on_attach = function(_, bufnr)
@@ -48,14 +45,12 @@ return {
               vim.lsp.codelens.refresh({ bufnr = bufnr })
             end, 200)
 
-            --[[
             vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
               buffer = bufnr,
               callback = function()
                 pcall(vim.lsp.codelens.refresh, { bufnr = bufnr })
               end,
             })
-            ]]
           end,
           default_settings = {
             ["rust-analyzer"] = {
@@ -79,7 +74,7 @@ return {
                 },
               },
               diagnostics = {
-                enable = false,
+                enable = true,
                 virtual_text = false,
               },
             },

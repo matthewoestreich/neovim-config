@@ -139,7 +139,7 @@ return {
       },
 
       diagnostics = {
-        enabled = false,
+        enabled = true,
         float = false,
         virtual_text = false,
         severity_sort = true,
