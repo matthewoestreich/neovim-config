@@ -33,7 +33,7 @@ return {
             })
             ]]
 
-            vim.keymap.set("n", "<leader>rrd", function()
+            vim.keymap.set("n", "<leader>rd", function()
               vim.cmd.RustLsp({ "renderDiagnostic", "current" })
             end, { silent = true, buffer = bufnr, desc = "RustLsp renderDiagnostic current" })
 
