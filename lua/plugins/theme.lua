@@ -1,7 +1,7 @@
 ---@diagnostic disable-next-line: unused-local
 local kanigawa = {
   "rebelot/kanagawa.nvim",
-  enabled = false,
+  enabled = true,
   lazy = false,
   priority = 1000,
   config = function()
@@ -26,6 +26,7 @@ local kanigawa = {
 
 local pitchblack = {
   "matthewoestreich/pitchblack.nvim",
+  enabled = true,
   priority = 1000,
   lazy = false,
   dependencies = {
@@ -37,6 +38,7 @@ local pitchblack = {
 local gh_dark_high_contrast = {
   "projekt0n/github-nvim-theme",
   name = "github-theme",
+  enabled = true,
   lazy = false, -- make sure we load this during startup if it is your main colorscheme
   priority = 1000, -- make sure to load this before all the other start plugins
   config = function()
@@ -48,8 +50,23 @@ local gh_dark_high_contrast = {
   end,
 }
 
+local tokyonight_night = {
+  "folke/tokyonight.nvim",
+  enabled = true,
+  lazy = false, -- Load during startup
+  priority = 1000, -- Load before other plugins
+  opts = {
+    style = "night", -- Set the theme style to 'night'
+  },
+  config = function(_, opts)
+    require("tokyonight").setup(opts)
+    vim.cmd([[colorscheme tokyonight-night]])
+  end,
+}
+
 return {
-  --kanigawa,
-  --pitchblack,
+  kanigawa,
+  pitchblack,
   gh_dark_high_contrast,
+  tokyonight_night,
 }
