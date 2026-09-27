@@ -56,6 +56,10 @@ return {
           end,
           default_settings = {
             ["rust-analyzer"] = {
+              lens = {
+                enable = true,
+                implementations = { enable = false },
+              },
               hover = {
                 dropGlue = {
                   enable = false,
