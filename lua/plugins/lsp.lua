@@ -49,12 +49,20 @@ end
 
 -- local util = require("lspconfig.util")
 
+local vtsls_file_types = { "typescript", "typescriptreact", "javascript", "javascriptreact" }
+local vtsls_root_dir = {
+  files_and_folders_that_denote_project_root = { "package.json", "tsconfig.json", "jsconfig.json" },
+  files_and_folders_to_exclude_from_denoting_project_root = { "deno.json", "deno.jsonc" },
+}
+
 return {
   {
     "neovim/nvim-lspconfig",
     opts = {
 
       servers = {
+        html = {},
+
         clangd = {
           on_attach = function(client, bufnr)
             require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
@@ -62,21 +70,41 @@ return {
         },
 
         vtsls = {
+          workspace_required = true,
           cmd = { "vtsls", "--stdio" },
-          filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+          filetypes = vtsls_file_types,
           root_dir = function(fname, callback)
             local result = find_root_dir({
-              root = { "package.json", "tsconfig.json", "jsconfig.json" },
-              exclude = { "deno.json", "deno.jsonc" },
+              root = vtsls_root_dir.files_and_folders_that_denote_project_root,
+              exclude = vtsls_root_dir.files_and_folders_to_exclude_from_denoting_project_root,
             })(fname)
 
             if result ~= nil then
               callback(result)
+            else
+              vim.notify(
+                string.format(
+                  "Project root not found! Please create one of these files/folders at root:\n-%s",
+                  table.concat(vtsls_root_dir.files_and_folders_that_denote_project_root, "\n-")
+                ),
+                vim.log.levels.WARN
+              )
             end
           end,
           settings = {
             vtsls = {
               autoUseWorkspaceTsdk = true,
+              experimental = {
+                completion = { enableServerSideFuzzyMatch = true },
+              },
+            },
+            ["js/ts"] = {
+              implicitProjectConfig = {
+                module = "ESNext",
+                target = "ES2022",
+                checkJs = false,
+                allowJs = true,
+              },
             },
             typescript = {
               updateImportsOnFileMove = { enabled = "always" },
