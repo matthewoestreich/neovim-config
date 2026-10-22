@@ -51,7 +51,7 @@ end
 
 local vtsls_file_types = { "typescript", "typescriptreact", "javascript", "javascriptreact" }
 local vtsls_root_dir = {
-  files_and_folders_that_denote_project_root = { "package.json", "tsconfig.json", "jsconfig.json" },
+  files_and_folders_that_denote_project_root = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
   files_and_folders_to_exclude_from_denoting_project_root = { "deno.json", "deno.jsonc" },
 }
 
@@ -61,15 +61,14 @@ return {
     opts = {
 
       servers = {
-        html = {},
 
-        clangd = {
-          on_attach = function(client, bufnr)
-            require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-          end,
+        biome = {
+          enabled = false,
+          autostart = false,
         },
 
         vtsls = {
+          enabled = true,
           workspace_required = true,
           cmd = { "vtsls", "--stdio" },
           filetypes = vtsls_file_types,
@@ -94,17 +93,15 @@ return {
           settings = {
             vtsls = {
               autoUseWorkspaceTsdk = true,
-              experimental = {
-                completion = { enableServerSideFuzzyMatch = true },
-              },
             },
             ["js/ts"] = {
               implicitProjectConfig = {
-                module = "ESNext",
-                target = "ES2022",
-                checkJs = false,
-                allowJs = true,
+                checkJs = true,
               },
+            },
+            javascript = {
+              validate = { enable = false },
+              suggestionActions = { enabled = true },
             },
             typescript = {
               updateImportsOnFileMove = { enabled = "always" },
@@ -117,7 +114,14 @@ return {
           },
         },
 
+        clangd = {
+          on_attach = function(client, bufnr)
+            require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+          end,
+        },
+
         denols = {
+          enabled = false,
           cmd = { "deno", "lsp" },
           filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
           root_dir = function(fname, callback)
