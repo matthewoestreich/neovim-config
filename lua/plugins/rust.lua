@@ -14,25 +14,6 @@ return {
         },
         server = {
           on_attach = function(_, bufnr)
-            --[[
-            vim.api.nvim_create_autocmd({ "CursorHold" }, {
-              pattern = { "*.rs" },
-              callback = function(ev)
-                --print(string.format("event fired: %s", vim.inspect(ev)))
-                -- Only trigger if we aren't already in a floating window
-                --for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-                --  if vim.api.nvim_win_get_config(winid).zindex then
-                --    return
-                --  end
-                --end
-                --vim.notify("running CursorHold")
-                -- Call the rustaceanvim diagnostic renderer
-                local op = vim.cmd.RustLsp({ "renderDiagnostic", "current" })
-                vim.notify(op)
-              end,
-            })
-            ]]
-
             vim.keymap.set("n", "<leader>rd", function()
               vim.cmd.RustLsp({ "renderDiagnostic", "current" })
             end, { silent = true, buffer = bufnr, desc = "RustLsp renderDiagnostic current" })
@@ -42,23 +23,16 @@ return {
             end, { silent = true, buffer = bufnr, desc = "RustLsp hover actions" })
 
             vim.defer_fn(function()
-              vim.lsp.codelens.refresh({ bufnr = bufnr })
+              vim.lsp.codelens.enable(true, { bufnr = bufnr })
             end, 200)
-
-            --[[
-            vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-              buffer = bufnr,
-              callback = function()
-                pcall(vim.lsp.codelens.refresh, { bufnr = bufnr })
-              end,
-            })
-            ]]
           end,
           default_settings = {
             ["rust-analyzer"] = {
               lens = {
                 enable = true,
                 implementations = { enable = false },
+                run = { enable = false },
+                debug = { enable = false },
               },
               hover = {
                 dropGlue = {
@@ -82,6 +56,7 @@ return {
               diagnostics = {
                 enable = true,
                 virtual_text = false,
+                disabled = { "inactive-code" },
               },
             },
           },
