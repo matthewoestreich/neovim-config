@@ -4,6 +4,7 @@
 
 -- IF RUNNING ON LINUX USE THE CLIPBOARD FOR YANK
 if vim.uv.os_uname().sysname == "Linux" then
+  vim.g.clipboard = "osc52"
   vim.opt.clipboard = "unnamedplus"
 end
 
