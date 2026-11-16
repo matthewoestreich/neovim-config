@@ -2,7 +2,8 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
--- IF RUNNING ON LINUX USE THE CLIPBOARD FOR YANK
+-- IF RUNNING ON LINUX, AND ON AN SSH SESSION FROM MY MAC,
+-- USE THE MAC CLIPBOARD FOR YANK, etc..
 if vim.uv.os_uname().sysname == "Linux" then
   vim.g.clipboard = "osc52"
   vim.opt.clipboard = "unnamedplus"
