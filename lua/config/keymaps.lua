@@ -4,6 +4,13 @@
 
 -------------------------------------------------------------------------------------------------------------------------------
 
+-- IF RUNNING ON LINUX, AND ON AN SSH SESSION FROM MY MAC,
+-- USE THE MAC CLIPBOARD FOR YANK, etc..
+if vim.uv.os_uname().sysname == "Linux" then
+  vim.keymap.set("n", "ysc", '"+yy', { desc = "Yank line to system clipboard" })
+  vim.keymap.set("v", "ysc", '"+y', { desc = "Yank selection to system clipboard" })
+end
+
 -- Delete without yank (use "c" instead if you want to cut eg. delete + yank)
 vim.keymap.set("n", "d", '"_d', { desc = "Delete without yank" })
 vim.keymap.set("v", "d", '"_d', { desc = "Delete without yank" })

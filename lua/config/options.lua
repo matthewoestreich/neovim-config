@@ -5,8 +5,21 @@
 -- IF RUNNING ON LINUX, AND ON AN SSH SESSION FROM MY MAC,
 -- USE THE MAC CLIPBOARD FOR YANK, etc..
 if vim.uv.os_uname().sysname == "Linux" then
-  vim.g.clipboard = "osc52"
-  vim.opt.clipboard = "unnamedplus"
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = {
+      ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+      ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+    },
+    paste = {
+      ["+"] = function()
+        return {}
+      end,
+      ["*"] = function()
+        return {}
+      end,
+    },
+  }
 end
 
 -- Add mouse events
