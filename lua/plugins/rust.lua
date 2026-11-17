@@ -28,6 +28,9 @@ return {
           end,
           default_settings = {
             ["rust-analyzer"] = {
+              cargo = {
+                cfgs = { "test" },
+              },
               lens = {
                 enable = true,
                 implementations = { enable = false },
