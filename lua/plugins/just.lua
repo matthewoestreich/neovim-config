@@ -3,7 +3,9 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        just = {},
+        just = {
+          mason = false,
+        },
       },
     },
     init = function()
